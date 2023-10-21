@@ -3,3 +3,5 @@ README.md
 README
 run-rest.ps1
 Dockerfile
+screenshots/*.png
+screenshots/*.jpg
