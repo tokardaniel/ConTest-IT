@@ -1,11 +1,16 @@
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from dotenv import load_dotenv
+
+load_dotenv(os.path.join(os.getcwd(), ".env"))
 
 def before_all(context):
-    context.browser =  get_driver()
+    context.driver = get_driver()
+    context.driver.get(os.getenv("BWPOOL_URL"))
 
 def after_all(context):
-    context.browser.quit()
+    context.driver.quit()
 
 def get_driver():
     options = Options()

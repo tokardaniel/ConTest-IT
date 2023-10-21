@@ -3,5 +3,4 @@
 Jellemző: Ez próba teszt
 
     Forgatókönyv: próba teszt
-        * próba
-        * Open the page
+        * Megjelent az oldal

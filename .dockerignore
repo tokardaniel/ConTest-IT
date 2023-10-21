@@ -1,3 +1,6 @@
+.git
+.gitignore
+.dockerignore
 README.md
 .vscode
 README
@@ -5,3 +8,4 @@ run-rest.ps1
 Dockerfile
 screenshots/*.png
 screenshots/*.jpg
+__pycache__

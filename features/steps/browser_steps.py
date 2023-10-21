@@ -1,8 +1,10 @@
-import time
 from behave import step
 
-@step('Open the page')
+from selenium_utils.elements import Elements
+
+@step('Megjelent az oldal')
 def step_imp(c):
-    c.browser.get('https://www.google.com')
-    time.sleep(5)
-    c.browser.save_screenshot('screenshots/loaded_page.png')
+    brand_item = Elements.find_element_by_xpath(c.driver, "//a[contains(text(), 'BWP nyilvántartó')]")
+    c.driver.save_screenshot('screenshots/loaded_page.png')
+
+    assert brand_item.is_displayed(), "Ha megjelent a 'BWP nyilvántartó felirat', akkor talán az oldal is"
