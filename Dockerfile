@@ -21,5 +21,5 @@ WORKDIR /test
 
 ADD . .
 
-RUN chmod +x ./database_migaration.sh
-RUN ./database_migaration.sh
+RUN chmod +x ./database_migaration.sh && chmod +x load_data.sh
+#RUN ./database_migaration.sh && ./load_data.sh
