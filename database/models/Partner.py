@@ -24,4 +24,5 @@ class Partner(Base):
     saved: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=False)
     deleted: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=False)
     error: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=False)
+    created_at: Mapped[str] = mapped_column(String(), nullable=False)
     sites: Mapped[List["Site"]] = relationship()

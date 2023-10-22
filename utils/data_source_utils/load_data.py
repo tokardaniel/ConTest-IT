@@ -1,6 +1,7 @@
 import os
 import sys
 from dotenv import load_dotenv
+from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
@@ -25,7 +26,10 @@ class LoadData:
         self.devices = DownloadData.download(url = os.getenv("RANDOM_DEVICES_API"))
 
         if len(self.users) != len(self.devices):
-            raise Exception("random userek számának meg kell egyeznie a random device-ok számával")
+            raise Exception("userek számának meg kell egyeznie a device-ok számával")
+
+        # egy csomag betöltésekor azonos időbéjeg
+        created_at = datetime.timestamp(datetime.now())
 
         with Session(engine) as session:
             for (user, d_device) in zip(self.users, self.devices):
@@ -37,7 +41,8 @@ class LoadData:
                     zip_code=user.get("address")["zip_code"],
                     street_name=user.get("address")["street_name"],
                     house_number="1234",
-                    email=user.get("email")
+                    email=user.get("email"),
+                    created_at=created_at
                 )
 
                 site = Site(
