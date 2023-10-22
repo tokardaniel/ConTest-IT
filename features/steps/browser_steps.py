@@ -1,6 +1,6 @@
 from behave import step
 
-from selenium_utils.elements import Elements
+from utils.selenium_utils.elements import Elements
 
 @step('Megjelent az oldal')
 def step_imp(c):
