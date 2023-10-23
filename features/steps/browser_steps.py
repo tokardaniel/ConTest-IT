@@ -11,13 +11,6 @@ def step_imp(c):
 
     assert brand_item.is_displayed(), "Ha megjelent a 'BWP nyilvántartó felirat', akkor talán az oldal is"
 
-@step('Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "{text}"')
-def step_imp(c, text: str):
-    Elements.wait_for_element_invisibility(
-        c.driver,
-        (By.XPATH, f"//table[@class='e-table']/tbody/tr/td[contains(text(), '{text}')]")
-    )
-
 @step('"{size}" db új adat betöltése API-n keresztül')
 def step_impl(c, size: int):
     l = LoadData()

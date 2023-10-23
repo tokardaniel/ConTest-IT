@@ -1,18 +1,16 @@
-import random
-import time
 from behave import step
 from faker import Faker
-from database.models import Partner
 
-from utils.data_source_utils.load_data import LoadData
-
-from utils.selenium_utils.elements import Elements
 from database.classes.Query import Query
 from steps.Partnerek.Partnerek import Partnerek
 
 @step('Partner modal megjelenítése')
 def step_impl(c):
     Partnerek.open_partner_modal(c)
+
+@step('Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "{text}"')
+def step_imp(c, text: str):
+    Partnerek.wait_for_partner_grid_placeholder_text(c, text)
 
 @step('Megjelent az ügyfelek grid')
 def step_impl(c):
@@ -55,5 +53,4 @@ def step_impl(c):
         Partnerek.insert_email_to_input(c, email=partner.email)
         Partnerek.insert_description_to_input(c, description=partner.data_id)
         Partnerek.cancel(c)
-
-
+        Partnerek.find_partner_from_table(c, name=f"{partner.first_name} {partner.last_name}")

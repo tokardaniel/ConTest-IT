@@ -5,6 +5,13 @@ from selenium.webdriver.common.by import By
 class Partnerek:
 
     @classmethod
+    def wait_for_partner_grid_placeholder_text(cls, c: object, text: str) -> None:
+        Elements.wait_for_element_invisibility(
+            c.driver,
+            (By.XPATH, f"//table[@class='e-table']/tbody/tr/td[contains(text(), '{text}')]")
+        )
+
+    @classmethod
     def open_partner_modal(cls, c: object) -> None:
         add_btn_element = Elements.find_element(
             c.driver,
@@ -70,3 +77,10 @@ class Partnerek:
         )
 
         cancel_btn_element.click()
+
+    @classmethod
+    def find_partner_from_table(cls, c: object, name: str) -> None:
+        Elements.insert_text_to_input_and_enter(c.driver, (By.ID, "Grid_ToolbarSearchBox"), name)
+
+
+
