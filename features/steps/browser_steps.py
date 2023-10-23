@@ -1,7 +1,9 @@
+import random
 from behave import step
 from selenium.webdriver.common.by import By
 
 from utils.selenium_utils.elements import Elements
+from utils.data_source_utils.load_data import LoadData
 
 @step('Megjelent az oldal')
 def step_imp(c):
@@ -15,3 +17,8 @@ def step_imp(c, text: str):
         c.driver,
         (By.XPATH, f"//table[@class='e-table']/tbody/tr/td[contains(text(), '{text}')]")
     )
+
+@step('"{size}" db új adat betöltése API-n keresztül')
+def step_impl(c, size: int):
+    l = LoadData()
+    l.load(size)

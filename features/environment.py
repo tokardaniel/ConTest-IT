@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 from datetime import datetime
+from database.migration import Migration
 
 load_dotenv(os.path.join(os.getcwd(), ".env"))
 timestamp = datetime.timestamp(datetime.now())
@@ -12,6 +13,9 @@ os.mkdir(path_dir)
 def before_all(context):
     context.driver = _get_driver()
     context.driver.get(os.getenv("BWPOOL_URL"))
+    # migrate memory database
+    migration = Migration()
+    migration.run()
 
 def after_step(context, step):
     filename = f"{step.name.replace(' ', '_')}.png"
