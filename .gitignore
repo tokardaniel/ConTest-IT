@@ -1,5 +1,4 @@
 .vscode
-screenshots/*.png
-screenshots/*.jpg
+screenshots/*
 __pycache__
 database/*.database
