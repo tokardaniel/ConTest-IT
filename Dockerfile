@@ -21,6 +21,3 @@ RUN wget "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.
 WORKDIR /test
 
 ADD . .
-
-RUN chmod +x ./database_migaration.sh && chmod +x load_data.sh
-RUN ./database_migaration.sh && ./load_data.sh
