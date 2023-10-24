@@ -13,15 +13,8 @@ from database.models.Device import Device
 
 class Migration(DB):
 
-    def __init__(self, connection_str: str = None):
-        self.connection_str = connection_str
-
     # migrate
     def run(self):
-        if self.connection_str is not None:
-            # save database to filesystem
-            self.engine = create_engine(f"sqlite:///{os.path.join(os.getcwd(), 'database/test_data.database')}", echo=True)
-
         Base.metadata.create_all(self.engine)
 
 if __name__ == "__main__":

@@ -1,12 +1,6 @@
 import os
 import sys
-import random
-import tempfile
-from dotenv import load_dotenv
-from exceptiongroup import catch
-from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from sqlalchemy import select
 
 sys.path.insert(0, os.getcwd())
 
@@ -15,10 +9,6 @@ from database.classes.DB import DB
 from database.models.Partner import Partner
 from database.models.Site import Site
 from database.models.Device import Device
-
-load_dotenv(os.path.join(os.getcwd(), ".env"))
-# engine = create_engine(f"sqlite:///{os.path.join(os.getcwd(), 'database/test_data.database')}", echo=True)
-# engine = create_engine("sqlite://")
 
 class LoadData(DB):
 
