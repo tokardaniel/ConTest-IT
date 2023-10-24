@@ -25,11 +25,10 @@ def after_all(context):
     context.driver.quit()
 
 def _get_driver() -> object:
-    if os.getenv("RUN_HEADLESS"):
-        options = Options()
+    options = Options()
+    if bool(int(os.getenv("RUN_HEADLESS"))):
         options.add_argument("--headless")
         options.add_argument("--window-size=1920x1080")
         options.add_argument('--no-sandbox')
-        return webdriver.Chrome(options=options)
 
-    return webdriver.Chrome()
+    return webdriver.Chrome(options=options)

@@ -10,7 +10,7 @@ Jellemző: Ez próba teszt
         * Megjelent az ügyfelek grid
         * Partner modal megjelenítése
         * Add partner modal megjelent
-        * Fake név megadása
+        * Név megadása: "Asdf Asdf"
         * Email megadása: "asd@gmail.com"
         * Telefonszám megadása: "305432455"
         * Megjegyzés megadása: "asdasd"

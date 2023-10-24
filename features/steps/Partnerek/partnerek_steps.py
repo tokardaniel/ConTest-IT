@@ -1,5 +1,4 @@
 from behave import step
-from faker import Faker
 
 from database.classes.Query import Query
 from steps.Partnerek.Partnerek import Partnerek
@@ -20,14 +19,13 @@ def step_impl(c):
 def step_impl(c):
     Partnerek.partners_grid_is_showed(c)
 
-@step('Fake név megadása')
-def step_impl(c):
-    fake = Faker()
-    Partnerek.insert_name_to_input(c, fake.name)
+@step('Név megadása: "{nev}"')
+def step_impl(c, nev: str):
+    Partnerek.insert_name_to_input(c, nev)
 
 @step('Email megadása: "{email}"')
 def step_impl(c, email: str):
-    Partnerek.insert_email_to_input(c. email)
+    Partnerek.insert_email_to_input(c, email)
 
 @step('Telefonszám megadása: "{telszam}"')
 def step_impl(c, telszam: str):
@@ -35,7 +33,7 @@ def step_impl(c, telszam: str):
 
 @step('Megjegyzés megadása: "{megjegyzes}"')
 def step_impl(c, megjegyzes: str):
-    Partnerek.insert_description_to_input(megjegyzes)
+    Partnerek.insert_description_to_input(c, megjegyzes)
 
 @step('Mentés')
 def step_impl(c):
