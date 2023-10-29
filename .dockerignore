@@ -8,3 +8,5 @@ run-rest.ps1
 Dockerfile
 screenshots/*
 __pycache__
+download/*.xlsx
+.DS_Store

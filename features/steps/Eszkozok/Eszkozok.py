@@ -93,6 +93,12 @@ class Eszkozok:
         return False
 
     @classmethod
+    def clear_table_search(cls, c: object) -> None:
+        clear_icon = Elements.find_element(c.driver, (By.CLASS_NAME, "e-clear-icon"))
+        clear_icon.click()
+        time.sleep(2)
+
+    @classmethod
     def _finded_name_and_device_name_in_row(cls, row: webelement, name: str, device_name: str) -> bool:
         tds = row.find_elements(By.TAG_NAME, "td")
 
@@ -108,3 +114,9 @@ class Eszkozok:
             return True
 
         return False
+
+    @classmethod
+    def download(cls, c):
+        downloand_btm_item = Elements.find_element(c.driver, (By.XPATH, "//div[@id='Grid_excelexport']/button"))
+
+        downloand_btm_item.click()

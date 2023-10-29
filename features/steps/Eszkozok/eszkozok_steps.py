@@ -25,7 +25,6 @@ def step_impl(c):
         for partner in partners:
             for site in partner.sites:
                 for device in site.devices:
-                    replaced_zip_code = site.zip_code.replace("-", "")
                     Eszkozok.open_add_device_modal(c)
                     Eszkozok.wait_for_device_modal(c)
                     Eszkozok.insert_device_name_to_input(c, f"{device.manufacturer} {device.model}")
@@ -36,3 +35,5 @@ def step_impl(c):
                     Eszkozok.insert_comment_to_input(c, comm=device.serial_number)
                     Eszkozok.save(c)
                     Eszkozok.find_device_from_table(c, partner=partner, device=device)
+                    Eszkozok.clear_table_search(c)
+                    Eszkozok.download(c)

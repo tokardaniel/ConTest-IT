@@ -2,3 +2,5 @@
 screenshots/*
 __pycache__
 database/*.database
+download/*.xlsx
+.DS_Store
