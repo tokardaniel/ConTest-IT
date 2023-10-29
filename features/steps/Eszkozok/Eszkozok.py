@@ -1,4 +1,8 @@
+import time
 from selenium.webdriver.common.by import By
+from database.models import Partner
+from database.models.Device import Device
+from selenium.webdriver.remote import webelement
 
 from utils.selenium_utils.elements import Elements
 
@@ -67,3 +71,40 @@ class Eszkozok:
         )
 
         cancel_btn_item.click()
+
+    @classmethod
+    def find_device_from_table(cls, c: object, partner: Partner, device: Device) -> bool:
+        partner_full_name = f"{partner.first_name} {partner.last_name}"
+        Elements.insert_text_to_input_and_enter(c.driver, (By.ID, "Grid_ToolbarSearchBox"), partner_full_name)
+
+        time.sleep(2)
+
+        # feltételezzük, hogy lehetnek azonos nevű ügyfelek, ezért az összes találatot megvizsgáljuk soronként
+        # legalább a név és az eszköz neve egyezik
+        table_rows = Elements.find_element(
+            c.driver,
+            (By.XPATH, "//table[@class='e-table']/tbody")
+        ).find_elements(By.TAG_NAME, "tr")
+
+        for row in table_rows:
+            if cls._finded_name_and_device_name_in_row(row, partner_full_name, f"{device.manufacturer} {device.model}"):
+                return True
+
+        return False
+
+    @classmethod
+    def _finded_name_and_device_name_in_row(cls, row: webelement, name: str, device_name: str) -> bool:
+        tds = row.find_elements(By.TAG_NAME, "td")
+
+        finded_name: bool = False
+        finded_device: bool = False
+        for td in tds:
+            if td.text == name:
+                finded_name = True
+            if td.text == device_name:
+                finded_device = True
+
+        if finded_device and finded_name:
+            return True
+
+        return False

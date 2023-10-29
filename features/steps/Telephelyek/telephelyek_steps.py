@@ -24,3 +24,4 @@ def step_impl(c):
         Telephelyek.insert_street_name_to_input(c, site.street_name)
         Telephelyek.insert_house_number_to_input(c, site.house_number)
         Telephelyek.save(c)
+        Telephelyek.find_site_from_table(c, partner=partner, site=site)

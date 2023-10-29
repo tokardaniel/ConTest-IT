@@ -35,3 +35,4 @@ def step_impl(c):
                     Eszkozok.insert_description_to_input(c, ds=device.platform)
                     Eszkozok.insert_comment_to_input(c, comm=device.serial_number)
                     Eszkozok.save(c)
+                    Eszkozok.find_device_from_table(c, partner=partner, device=device)

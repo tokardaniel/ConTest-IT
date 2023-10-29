@@ -60,3 +60,9 @@ class Elements:
         )
         list_element = driver.find_element(*list_items_locator)
         list_element.click()
+
+    @classmethod
+    def wait_for_spinner(cls, driver: object, time: int = 10):
+        WebDriverWait(driver, time).until(
+            EC.invisibility_of_element((By.CLASS_NAME, "e-spin-bootstrap5"))
+        )
