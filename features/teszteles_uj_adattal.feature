@@ -22,3 +22,9 @@ Jellemző: Létrehozunk öt új partnert, hozzájuk egy-egy telephelyet és egy-
         * Navigálás a bal menüben a következő menüpontra: "Eszközök"
         * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
         * Eszközök rögzítése
+
+    Forgatókönyv: Szervíz státusz beállítása
+        * Navigálás a bal menüben a következő menüpontra: "Telephelyek"
+        * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
+        * Utoljára rögzített telephely visszakeresése
+        * Telephely adatok oldal megnyitása

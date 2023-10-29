@@ -1,4 +1,5 @@
 from behave import step
+from database.models.Partner import Partner
 
 from features.steps.Telephelyek.Telephelyek import Telephelyek
 from database.classes.Query import Query
@@ -25,3 +26,14 @@ def step_impl(c):
         Telephelyek.insert_house_number_to_input(c, site.house_number)
         Telephelyek.save(c)
         Telephelyek.find_site_from_table(c, partner=partner, site=site)
+
+@step('Utoljára rögzített telephely visszakeresése')
+def step_imppl(c):
+    q = Query()
+    partner: Partner = q.get_all_partners_full_join()[0]
+
+    Telephelyek.find_site_from_table(c, partner=partner, site=partner.sites[0])
+
+@step('Telephely adatok oldal megnyitása')
+def step_impl(c):
+    Telephelyek.open_site_link(c)

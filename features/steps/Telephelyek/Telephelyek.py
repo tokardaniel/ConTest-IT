@@ -104,6 +104,14 @@ class Telephelyek:
         return False
 
     @classmethod
+    def open_site_link(cls, c: object) -> None:
+        link_item = Elements.find_element(
+            c.driver,
+            (By.XPATH, "//table[@id='Grid_content_table']/tbody/tr/td/div/div/a[@class='nav-link']")
+        )
+        link_item.click()
+
+    @classmethod
     def _finded_name_and_city_and_zip_in_row(cls, row: webelement, name: str, city: str, zip: str) -> bool:
         tds = row.find_elements(By.TAG_NAME, "td")
 
