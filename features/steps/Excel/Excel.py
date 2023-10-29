@@ -6,7 +6,7 @@ class Excel:
 
     def __init__(self, excel_path: str):
         self.excel_path = excel_path
-        self.excel_dataframe = self.read_exel_data_to_df()
+        self.excel_dataframe = self.read_exel_data_to_df(self.excel_path)
 
     def find_value_in_column(self, column: str, value: str) -> DataFrame:
         return self.excel_dataframe[self.excel_dataframe[column] == value]

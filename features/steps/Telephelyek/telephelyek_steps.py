@@ -1,5 +1,6 @@
 from behave import step
 from database.models.Partner import Partner
+from database.models.Site import Site
 
 from features.steps.Telephelyek.Telephelyek import Telephelyek
 from database.classes.Query import Query
@@ -37,3 +38,24 @@ def step_imppl(c):
 @step('Telephely adatok oldal megnyitása')
 def step_impl(c):
     Telephelyek.open_site_link(c)
+
+@step('Eszköz adatok összehasolítása az excelben lévő adatokkal')
+def step_impl(c):
+    # kiveszünk egy partnert a db-ből, rákeresünk és megnézzük, az eszköz adatokat,
+    # hogy egyeznek e a db-ben lévőkkel
+    q = Query()
+    partner: Partner = q.get_all_partners_full_join()[0]
+    site: Site = partner.sites[0]
+
+    Telephelyek.find_site_from_table(c, partner=partner, site=site)
+
+    Telephelyek.open_site_link(c)
+
+    # Explicit wait
+    Telephelyek.site_profile_showed(c)
+
+    Telephelyek.compare_with_excel(c)
+
+@step('Telephelyek adatlap megjelent')
+def step_impl(c) -> None:
+    Telephelyek.site_profile_showed(c)

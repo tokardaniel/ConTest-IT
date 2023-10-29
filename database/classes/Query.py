@@ -52,6 +52,13 @@ class Query(DB):
         with Session(self.engine) as session:
             return session.execute(stmt).first()[0]
 
+    # egy adottt parnerhez tartozó eszközöket adja vissza email alapján
+    def get_device_by_partner_email(self, email: str) -> List[Device]:
+        stmt = Select(Partner).where(Partner.email == email)
+
+        with Session(self.engine) as session:
+            return session.execute(stmt).first().devices
+
     def get_sites_by_id(self, id: int) -> List[Site]:
         stmt = Select(Site).where(Site.id == id)
         sites: List[Site] = []

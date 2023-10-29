@@ -26,5 +26,6 @@ Jellemző: Létrehozunk öt új partnert, hozzájuk egy-egy telephelyet és egy-
     Forgatókönyv: Szervíz státusz beállítása
         * Navigálás a bal menüben a következő menüpontra: "Telephelyek"
         * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
-        * Utoljára rögzített telephely visszakeresése
-        * Telephely adatok oldal megnyitása
+
+    Forgatókönyv: Telephely oldalon megjelenő eszköz adatok összevetése az excellel
+        * Eszköz adatok összehasolítása az excelben lévő adatokkal

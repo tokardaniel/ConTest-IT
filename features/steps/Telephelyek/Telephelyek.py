@@ -1,10 +1,11 @@
-from math import fabs
+import os
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote import webelement
 
 from database.models.Partner import Partner
 from database.models.Site import Site
+from features.steps.Excel.Excel import Excel
 from utils.selenium_utils.elements import Elements
 
 
@@ -110,6 +111,32 @@ class Telephelyek:
             (By.XPATH, "//table[@id='Grid_content_table']/tbody/tr/td/div/div/a[@class='nav-link']")
         )
         link_item.click()
+
+    @classmethod
+    def compare_with_excel(cls, c: object) -> None:
+        excel_full_path = os.path.join(os.getcwd(), f"{os.getenv('DOWNLOADS_PATH')}/{os.getenv('Excel_FILE_NAME')}")
+        excel = Excel(excel_full_path)
+
+        # soronként megyünk a táblázatban, gondolva arra, hogy több eszköz is lehet
+        rows = Elements.find_element(
+            c.driver,
+            (By.XPATH, "//table[@id='toolList_content_table']/tbody")
+        ).find_elements(By.TAG_NAME, "tr")
+
+        for row in rows:
+            tds = row.find_elements(By.TAG_NAME, "td")
+            azon = int(tds[0].text)
+            device_name = tds[1].text
+
+            assert excel.find_value_in_column("Azonosító", azon).empty is False
+            assert excel.find_value_in_column("Neve", device_name).empty is False
+
+    @classmethod
+    def site_profile_showed(cls, c: object) -> None:
+        Elements.wait_for_element_visibility(
+            c.driver,
+            (By.XPATH, "//h6[contains(text(), 'Telephely adatok')]")
+        )
 
     @classmethod
     def _finded_name_and_city_and_zip_in_row(cls, row: webelement, name: str, city: str, zip: str) -> bool:
