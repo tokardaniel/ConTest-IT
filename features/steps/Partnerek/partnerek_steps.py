@@ -50,5 +50,5 @@ def step_impl(c):
         Partnerek.insert_name_to_input(c, name=f"{partner.first_name} {partner.last_name}")
         Partnerek.insert_email_to_input(c, email=partner.email)
         Partnerek.insert_description_to_input(c, description=partner.data_id)
-        Partnerek.cancel(c)
+        Partnerek.save(c)
         Partnerek.find_partner_from_table(c, name=f"{partner.first_name} {partner.last_name}")

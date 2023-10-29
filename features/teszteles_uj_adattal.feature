@@ -18,4 +18,7 @@ Jellemző: Létrehozunk öt új partnert, hozzájuk egy-egy telephelyet és egy-
         * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
         * Telephelyek rögzítése
 
-
+    Forgatókönyv: Eszközök rögzítése
+        * Navigálás a bal menüben a következő menüpontra: "Eszközök"
+        * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
+        * Eszközök rögzítése

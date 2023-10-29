@@ -21,14 +21,6 @@ class Telephelyek:
         )
 
     @classmethod
-    def insert_name_to_input(cls, c: object, name: str) -> None:
-        Elements.insert_text_to_input(
-            c.driver,
-            (By.XPATH, "//input[@placeholder='Ügyfél']"),
-            name
-        )
-
-    @classmethod
     def insert_city_to_input(cls, c: object, city: str) -> None:
         Elements.insert_text_to_input(
             c.driver,
@@ -58,6 +50,14 @@ class Telephelyek:
             c.driver,
             (By.ID, "szam"),
             house_number
+        )
+
+    @classmethod
+    def select_name_from_combobox(cls, c: object, name: str) -> None:
+        Elements.select_combobox_by_name(c.driver,
+                    (By.XPATH, "//input[@placeholder='Ügyfél']"),
+                    (By.XPATH, f"//li[contains(text(), '{name}')]"),
+                    name
         )
 
     @classmethod

@@ -29,8 +29,34 @@ class Elements:
         element.send_keys(text)
 
     @classmethod
+    def insert_text_to_input_and_tab(cls, driver: object, locator: Tuple[str, str], text: str) -> None:
+        element = driver.find_element(*locator)
+        element.clear()
+        element.send_keys(text)
+        element.send_keys(Keys.TAB)
+
+    @classmethod
     def insert_text_to_input_and_enter(cls, driver: object, locator: Tuple[str, str], text: str) -> None:
         element = driver.find_element(*locator)
         element.clear()
         element.send_keys(text)
         element.send_keys(Keys.ENTER)
+
+    @classmethod
+    def select_combobox_by_name(cls,
+                        driver: object,
+                        text_input_locator: Tuple[str, str],
+                        list_items_locator: Tuple[str, str],
+                        name: str,
+                        wait_time: int = 10
+    ):
+        text_input_element = driver.find_element(*text_input_locator)
+        text_input_element.clear()
+        text_input_element.send_keys(name)
+        # megvárjuk, hogy lenyíljon rendesen a lista
+        list_element = None
+        WebDriverWait(driver, wait_time).until(
+            EC.visibility_of_element_located(locator=list_items_locator)
+        )
+        list_element = driver.find_element(*list_items_locator)
+        list_element.click()
