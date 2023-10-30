@@ -23,9 +23,12 @@ Jellemző: Létrehozunk öt új partnert, hozzájuk egy-egy telephelyet és egy-
         * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
         * Eszközök rögzítése
 
-    Forgatókönyv: Szervíz státusz beállítása
+    Forgatókönyv: Telephely oldalon megjelenő eszköz adatok összevetése az excellel
         * Navigálás a bal menüben a következő menüpontra: "Telephelyek"
         * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
-
-    Forgatókönyv: Telephely oldalon megjelenő eszköz adatok összevetése az excellel
         * Eszköz adatok összehasolítása az excelben lévő adatokkal
+
+    Forgatókönyv: Szervíz státusz beállítása
+        * Navigálás a bal menüben a következő menüpontra: "Eszközök"
+        * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
+        * Egy eszköz szervízstátuszának módosítása

@@ -1,5 +1,6 @@
 import time
 from behave import step
+from database.models import Device, Partner
 
 from features.steps.Eszkozok.Eszkozok import Eszkozok
 from database.classes.Query import Query
@@ -37,3 +38,18 @@ def step_impl(c):
                     Eszkozok.find_device_from_table(c, partner=partner, device=device)
                     Eszkozok.clear_table_search(c)
                     Eszkozok.download(c)
+
+@step("Egy eszköz szervízstátuszának módosítása")
+def step_impl(c):
+    q = Query()
+    partner: Partner = q.get_all_partners_full_join()[0]
+    device: Device = partner.sites[0].devices[0]
+
+    Eszkozok.find_device_from_table(c, partner=partner, device=device)
+    Eszkozok.edit_selected_device(c)
+    Eszkozok.wait_for_device_modal(c)
+    Eszkozok.click_on_checkbox(c)
+    Eszkozok.save(c)
+
+    # visszakeressük az eszközt
+    # TODO

@@ -99,6 +99,29 @@ class Eszkozok:
         time.sleep(2)
 
     @classmethod
+    def edit_selected_device(cls, c: object) -> None:
+        # Előfeététel, hogy a grid le legyen szűrve
+
+        # Kiválasztjuk a gridből szerkesztésre a leszűrt első elemet
+        Elements.find_element(
+            c.driver,
+            (By.XPATH, "//table[@class='e-table']/tbody/tr[@class='e-row e-altrow']")
+        ).click()
+
+        # Megnyomjuk az edit gombot
+        Elements.find_element(c.driver, (By.ID, "Grid_add")).click()
+
+    @classmethod
+    def download(cls, c):
+        downloand_btm_item = Elements.find_element(c.driver, (By.XPATH, "//div[@id='Grid_excelexport']/button"))
+
+        downloand_btm_item.click()
+
+    @classmethod
+    def click_on_checkbox(c):
+        Elements.find_element(c.driver, (By.XPATH, "//input[@class='e-control e-checkbox e-lib']")).click()
+
+    @classmethod
     def _finded_name_and_device_name_in_row(cls, row: webelement, name: str, device_name: str) -> bool:
         tds = row.find_elements(By.TAG_NAME, "td")
 
@@ -114,9 +137,3 @@ class Eszkozok:
             return True
 
         return False
-
-    @classmethod
-    def download(cls, c):
-        downloand_btm_item = Elements.find_element(c.driver, (By.XPATH, "//div[@id='Grid_excelexport']/button"))
-
-        downloand_btm_item.click()
