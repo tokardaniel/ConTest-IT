@@ -1,5 +1,6 @@
 import os
 import shutil
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
@@ -21,6 +22,7 @@ def before_all(context):
 def after_step(context, step):
     filename = f"{step.name.replace(' ', '_')}.png"
     context.driver.get_screenshot_as_file(os.path.join(path_dir, filename))
+    time.sleep(1)
 
 def after_all(context):
     context.driver.quit()
