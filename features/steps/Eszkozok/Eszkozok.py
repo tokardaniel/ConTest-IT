@@ -118,7 +118,7 @@ class Eszkozok:
         downloand_btm_item.click()
 
     @classmethod
-    def click_on_checkbox(c):
+    def click_on_checkbox(cls, c):
         Elements.find_element(c.driver, (By.XPATH, "//input[@class='e-control e-checkbox e-lib']")).click()
 
     @classmethod
