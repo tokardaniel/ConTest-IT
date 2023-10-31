@@ -114,7 +114,7 @@ class Telephelyek:
 
     @classmethod
     def compare_with_excel(cls, c: object) -> None:
-        excel_full_path = os.path.join(os.getcwd(), f"{os.getenv('DOWNLOADS_PATH')}/{os.getenv('Excel_FILE_NAME')}")
+        excel_full_path = os.path.join(os.getcwd(), f"{os.getenv('DOWNLOADS_PATH')}/{os.getenv('EXCEL_FILE_NAME')}")
         excel = Excel(excel_full_path)
 
         # soronként megyünk a táblázatban, gondolva arra, hogy több eszköz is lehet

@@ -22,7 +22,7 @@ def before_all(context):
 def after_step(context, step):
     filename = f"{step.name.replace(' ', '_')}.png"
     context.driver.get_screenshot_as_file(os.path.join(path_dir, filename))
-    time.sleep(1)
+    time.sleep(os.getenv("IMPLICIT_WAIT_AFTER_STEPS"))
 
 def after_all(context):
     context.driver.quit()
