@@ -4,7 +4,7 @@ from database.models import Device, Partner
 
 from features.steps.Eszkozok.Eszkozok import Eszkozok
 from database.classes.Query import Query
-
+from utils.selenium_utils.elements import Elements
 
 @step('Add eszköz')
 def step_impl(c):
@@ -49,7 +49,10 @@ def step_impl(c):
     Eszkozok.edit_selected_device(c)
     Eszkozok.wait_for_device_modal(c)
     Eszkozok.click_on_checkbox(c)
+    Eszkozok.update_service_status_in_db(device=device)
     Eszkozok.save(c)
 
     # visszakeressük az eszközt
-    # TODO
+
+    Eszkozok.find_device_from_table(c, partner=partner, device=device)
+    assert Eszkozok.service_checkbox_is_displayed(c)

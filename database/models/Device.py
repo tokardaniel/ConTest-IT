@@ -16,6 +16,4 @@ class Device(Base):
     serial_number: Mapped[str] = mapped_column(String(50), nullable=False)
     service: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=False)
     saved: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=False)
-    deleted: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=False)
-    error: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=False)
     site_id: Mapped[int] = mapped_column(Integer, ForeignKey("site.id"))

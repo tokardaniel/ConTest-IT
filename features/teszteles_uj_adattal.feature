@@ -1,6 +1,6 @@
 #language: hu
 
-Jellemző: Létrehozunk öt új partnert, hozzájuk egy-egy telephelyet és egy-egy eszközt
+Jellemző: Létrehozunk egy új partnert, hozzá egy telephelyet és egy eszközt
 
     Forgatókönyv: Adatok begyűjtése
         * "1" db új adat betöltése API-n keresztül
@@ -32,3 +32,8 @@ Jellemző: Létrehozunk öt új partnert, hozzájuk egy-egy telephelyet és egy-
         * Navigálás a bal menüben a következő menüpontra: "Eszközök"
         * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
         * Egy eszköz szervízstátuszának módosítása
+
+    Forgatókönyv: Telephelyek oldalon vizsgáljuk, hogy nem jelenik e meg a szervízben lévő eszköz
+        * Navigálás a bal menüben a következő menüpontra: "Telephelyek"
+        * Megvárjuk, hogy eltűnjön a táblázatból a következő szöveget tartalmazó element: "No records to display"
+        * Egy telephely esetén nem jelennek meg a szervízben lévő eszközök

@@ -1,6 +1,7 @@
 from behave import step
 from database.models.Partner import Partner
 from database.models.Site import Site
+from database.models.Device import Device
 
 from features.steps.Telephelyek.Telephelyek import Telephelyek
 from database.classes.Query import Query
@@ -42,7 +43,7 @@ def step_impl(c):
 @step('Eszköz adatok összehasolítása az excelben lévő adatokkal')
 def step_impl(c):
     # kiveszünk egy partnert a db-ből, rákeresünk és megnézzük, az eszköz adatokat,
-    # hogy egyeznek e a db-ben lévőkkel
+    # hogy egyeznek e a excel-ben lévőkkel
     q = Query()
     partner: Partner = q.get_all_partners_full_join()[0]
     site: Site = partner.sites[0]
@@ -59,3 +60,20 @@ def step_impl(c):
 @step('Telephelyek adatlap megjelent')
 def step_impl(c) -> None:
     Telephelyek.site_profile_showed(c)
+
+@step('Egy telephely esetén nem jelennek meg a szervízben lévő eszközök')
+def step_impl(c) -> None:
+    # keresünk egy olyan partnert, akinek van szervízben lévő eszköze
+    q = Query()
+    partner: Partner = q.get_all_service_devices_of_partner()[0]
+    site: Site = partner.sites[0]
+    device: Device = site.devices[0]
+
+    Telephelyek.find_site_from_table(c, partner=partner, site=site)
+
+    Telephelyek.open_site_link(c)
+
+    # Explicit wait
+    Telephelyek.site_profile_showed(c)
+
+    Telephelyek.compare_with_db(c, device=device)

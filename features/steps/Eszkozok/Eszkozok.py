@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from database.models import Partner
 from database.models.Device import Device
 from selenium.webdriver.remote import webelement
+from database.classes.Query import Query
 
 from utils.selenium_utils.elements import Elements
 
@@ -105,24 +106,30 @@ class Eszkozok:
         # Kiválasztjuk a gridből szerkesztésre a leszűrt első elemet
         Elements.find_element(
             c.driver,
-            (By.XPATH, "(//table[@class='e-table']/tbody/tr[@class='e-row e-altrow']/td)[1]")
+            (By.XPATH, "//table[@class='e-table']/tbody/tr[@class='e-row e-altrow']")
         ).click()
 
         # Megnyomjuk az edit gombot
-        Elements.find_element(c.driver, (By.ID, "Grid_add")).click()
-
-        # checkbox bejelölése
-        Elements.find_element(c.driver, (By.XPATH, "//span[@class='e-label' and contains(text(), 'Szervíz')]")).click()
+        Elements.find_element(c.driver, (By.ID, "Grid_edit")).click()
 
     @classmethod
-    def download(cls, c):
+    def download(cls, c: object) -> None:
         downloand_btm_item = Elements.find_element(c.driver, (By.XPATH, "//div[@id='Grid_excelexport']/button"))
 
         downloand_btm_item.click()
 
     @classmethod
-    def click_on_checkbox(cls, c):
-        Elements.find_element(c.driver, (By.XPATH, "//input[@class='e-control e-checkbox e-lib']")).click()
+    def click_on_checkbox(cls, c: object) -> None:
+        Elements.find_element(c.driver, (By.XPATH, "//span[@class='e-label' and contains(text(), 'Szervíz')]")).click()
+
+    @classmethod
+    def update_service_status_in_db(cls, device: Device) -> None:
+        q = Query()
+        q.update_service_status(device=device)
+
+    @classmethod
+    def service_checkbox_is_displayed(cls, c: object) -> bool:
+        return Elements.find_element(c.driver, (By.XPATH, "//table/tbody/tr/td[@aria-label='True Column Header Szervíz']")).is_displayed()
 
     @classmethod
     def _finded_name_and_device_name_in_row(cls, row: webelement, name: str, device_name: str) -> bool:

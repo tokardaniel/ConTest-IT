@@ -1,6 +1,7 @@
 from typing import List, Union
 from sqlalchemy.orm import Session
 from sqlalchemy import Select
+from sqlalchemy import Update
 from sqlalchemy.orm import joinedload
 from database.classes.DB import DB
 from database.models.Partner import Partner
@@ -35,7 +36,6 @@ class Query(DB):
 
         return sites
 
-    @classmethod
     def get_all_devices(self) -> List[Device]:
         stmt = Select(Device)
         devices: List[Device] = []
@@ -78,3 +78,14 @@ class Query(DB):
                 devices.append(device)
 
         return devices
+
+    def get_all_service_devices_of_partner(self) -> List[Partner]:
+        with Session(self.engine) as session:
+            return session.query(Partner).options(joinedload(Partner.sites).subqueryload(Site.devices)).where(Device.service == True).all()
+
+    def update_service_status(self, device: Device) -> None:
+        stmt = Update(Device).where(Device.id == device.id).values(service = True)
+
+        with Session(self.engine) as session:
+            session.execute(stmt)
+            session.commit()

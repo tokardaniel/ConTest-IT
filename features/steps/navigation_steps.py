@@ -10,4 +10,3 @@ def step_impl(c, menupont_neve: str):
     )
 
     nav_element.click()
-

@@ -5,6 +5,7 @@ from selenium.webdriver.remote import webelement
 
 from database.models.Partner import Partner
 from database.models.Site import Site
+from database.models.Device import Device
 from features.steps.Excel.Excel import Excel
 from utils.selenium_utils.elements import Elements
 
@@ -130,6 +131,23 @@ class Telephelyek:
 
             assert excel.find_value_in_column("Azonosító", azon).empty is False
             assert excel.find_value_in_column("Neve", device_name).empty is False
+
+    @classmethod
+    def compare_with_db(cls, c: object, device: Device) -> None:
+        rows = Elements.find_element(
+            c.driver,
+            (By.XPATH, "//table[@id='toolList_content_table']/tbody")
+        ).find_elements(By.TAG_NAME, "tr")
+
+        for row in rows:
+            tds = row.find_elements(By.TAG_NAME, "td")
+            if tds[0].text == "No records to display":
+                return None
+            device_name = tds[1].text
+
+            db_device_name = f"{device.manufacturer} {device.model}"
+            if device_name == db_device_name:
+                raise Exception("Megjelent a szervíz státuszban lévő eszköz a telepheyek oldalon")
 
     @classmethod
     def site_profile_showed(cls, c: object) -> None:
