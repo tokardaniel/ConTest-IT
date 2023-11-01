@@ -105,11 +105,14 @@ class Eszkozok:
         # Kiválasztjuk a gridből szerkesztésre a leszűrt első elemet
         Elements.find_element(
             c.driver,
-            (By.XPATH, "//table[@class='e-table']/tbody/tr[@class='e-row e-altrow']")
+            (By.XPATH, "(//table[@class='e-table']/tbody/tr[@class='e-row e-altrow']/td)[1]")
         ).click()
 
         # Megnyomjuk az edit gombot
         Elements.find_element(c.driver, (By.ID, "Grid_add")).click()
+
+        # checkbox bejelölése
+        Elements.find_element(c.driver, (By.XPATH, "//span[@class='e-label' and contains(text(), 'Szervíz')]")).click()
 
     @classmethod
     def download(cls, c):
