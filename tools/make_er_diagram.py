@@ -18,7 +18,7 @@ class MakeErDiagram:
         self.engine = migration.engine
 
     def generate_er_diagram(self):
-        filename = 'mymodel.png'
+        filename = 'er_diagram.png'
 
         render_er(self.engine.url, filename)
 
