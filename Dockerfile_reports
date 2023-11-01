@@ -1,0 +1,22 @@
+FROM node:lts-slim
+
+USER root
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update -y
+
+# JAVA dependenci install for allure
+RUN apt-get install openjdk-17-jre -y
+RUN export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+RUN npm i -g allure-commandline
+
+WORKDIR /dashboard/
+RUN mkdir reports
+
+ADD start-server.sh start-server.sh
+RUN chmod +x start-server.sh
+
+EXPOSE 9999
+
+ENTRYPOINT ./start-server.sh

@@ -5,4 +5,4 @@ if (!$args[0]) {
     exit(1)
 }
 
-docker run -it --rm contestit behave $args[0].replace("\", "/") --junit
+docker run --volume contestit_volume:/test/reports -it --rm contestit behave $args[0].replace("\", "/")  -f allure_behave.formatter:AllureFormatter -o reports
