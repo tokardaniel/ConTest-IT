@@ -5,4 +5,4 @@ if (!$args[0]) {
     exit(1)
 }
 
-docker run -it --rm contestit behave $args[0].replace("\", "/")
+docker run -it --rm contestit behave $args[0].replace("\", "/") --junit

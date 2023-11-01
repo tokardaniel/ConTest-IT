@@ -10,3 +10,4 @@ screenshots/*
 __pycache__
 download/*.xlsx
 .DS_Store
+reports/*.xml

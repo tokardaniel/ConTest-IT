@@ -4,3 +4,4 @@ __pycache__
 database/*.database
 downloads/*.xlsx
 .DS_Store
+reports/*.xml
