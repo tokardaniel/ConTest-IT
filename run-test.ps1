@@ -1,2 +1,8 @@
 Write-Host "### run test"
-docker run -it --rm contestit behave ./features/teszteles_uj_adattal.feature
+
+if (!$args[0]) {
+    Write-Host "Add meg a feature fajlt. $($MyInvocation.MyCommand.Name) poth/to/featurefile"
+    exit(1)
+}
+
+docker run -it --rm contestit behave $args[0].replace("\", "/")
