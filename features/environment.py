@@ -5,9 +5,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
 from datetime import datetime
-from database.migration import Migration
 
 load_dotenv(os.path.join(os.getcwd(), ".env"))
+
+from database.migration import Migration
+
+# setup screenshots
 timestamp = datetime.timestamp(datetime.now())
 path_dir = f"screenshots/{timestamp}"
 os.mkdir(path_dir)
@@ -22,7 +25,7 @@ def before_all(context):
 def after_step(context, step):
     filename = f"{step.name.replace(' ', '_')}.png"
     context.driver.get_screenshot_as_file(os.path.join(path_dir, filename))
-    time.sleep(os.getenv("IMPLICIT_WAIT_AFTER_STEPS"))
+    time.sleep(int(os.getenv("IMPLICIT_WAIT_AFTER_STEPS")))
 
 def after_all(context):
     context.driver.quit()
