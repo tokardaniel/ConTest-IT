@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 from sqlalchemy.orm import Session
 
 sys.path.insert(0, os.getcwd())
@@ -40,7 +41,7 @@ class LoadData(DB):
                     city=user.get("address")["city"],
                     zip_code=user.get("address")["zip_code"],
                     street_name=user.get("address")["street_name"],
-                    house_number="1234"
+                    house_number=re.split("(\d+).*?\s+(.+)", user.get("address")["street_address"])[1]
                 )
 
                 device = Device(
