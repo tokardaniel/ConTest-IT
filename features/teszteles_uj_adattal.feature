@@ -3,7 +3,7 @@
 Jellemző: Létrehozunk egy új partnert, hozzá egy telephelyet és egy eszközt
 
     Forgatókönyv: Adatok begyűjtése
-        * "1" db új adat betöltése API-n keresztül
+        * "2" db új adat betöltése API-n keresztül
 
     Forgatókönyv: Parnerek rögzítése
         * Megjelent az oldal

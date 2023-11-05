@@ -18,26 +18,23 @@ def step_impl(c):
 @step("Eszközök rögzítése")
 def step_impl(c):
     q = Query()
-    devices = q.get_all_devices()
+    partners = q.get_all_partners_full_join()
+    for partner in partners:
+        for site in partner.sites:
+            for device in site.devices:
+                Eszkozok.open_add_device_modal(c)
+                Eszkozok.wait_for_device_modal(c)
+                Eszkozok.insert_device_name_to_input(c, f"{device.manufacturer} {device.model}")
+                Eszkozok.select_partner_from_combobox(c, name=f"{partner.first_name} {partner.last_name}")
+                time.sleep(2)
+                Eszkozok.select_site_from_combobox(c, name=site.street_name)
+                Eszkozok.insert_description_to_input(c, ds=device.platform)
+                Eszkozok.insert_comment_to_input(c, comm=device.serial_number)
+                Eszkozok.save(c)
+                Eszkozok.find_device_from_table(c, partner=partner, device=device)
+                Eszkozok.clear_table_search(c)
 
-    for device in devices:
-        q = Query()
-        partners = q.get_all_partners_full_join()
-        for partner in partners:
-            for site in partner.sites:
-                for device in site.devices:
-                    Eszkozok.open_add_device_modal(c)
-                    Eszkozok.wait_for_device_modal(c)
-                    Eszkozok.insert_device_name_to_input(c, f"{device.manufacturer} {device.model}")
-                    Eszkozok.select_partner_from_combobox(c, name=f"{partner.first_name} {partner.last_name}")
-                    time.sleep(2)
-                    Eszkozok.select_site_from_combobox(c, name=site.street_name)
-                    Eszkozok.insert_description_to_input(c, ds=device.platform)
-                    Eszkozok.insert_comment_to_input(c, comm=device.serial_number)
-                    Eszkozok.save(c)
-                    Eszkozok.find_device_from_table(c, partner=partner, device=device)
-                    Eszkozok.clear_table_search(c)
-                    Eszkozok.download(c)
+    Eszkozok.download(c)
 
 @step("Egy eszköz szervízstátuszának módosítása")
 def step_impl(c):
