@@ -30,10 +30,6 @@ class LoadData(DB):
                     data_id=user.get("id"),
                     first_name=user.get("first_name"),
                     last_name=user.get("last_name"),
-                    city=user.get("address")["city"],
-                    zip_code=user.get("address")["zip_code"],
-                    street_name=user.get("address")["street_name"],
-                    house_number="1234",
                     email=user.get("email"),
                 )
 
