@@ -1,6 +1,6 @@
 #language: hu
 
-Jellemző: Létrehozunk egy új partnert, hozzá egy telephelyet és egy eszközt
+Jellemző: Létrehozunk egy új partnert, hozzá egy telephelyet és egy eszközt a partner id-val azonosítjuk
 
     Forgatókönyv: Adatok begyűjtése
         * Legyen egy partner a következő id-val "1234", akinek van egy random eszköze
