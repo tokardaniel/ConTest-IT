@@ -1,6 +1,4 @@
-from lib2to3.fixes.fix_except import find_excepts
 import time
-from typing import List
 from utils.selenium_utils.elements import Elements
 from database.models.Partner import Partner
 from selenium.webdriver.common.by import By
