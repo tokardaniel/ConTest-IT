@@ -17,7 +17,7 @@ class LoadData(DB):
         self.users: list[dict] = []
         self.devices: list[dict] = []
 
-    def load(self, size=10):
+    def load(self, size=10, test_id=1234):
         self.users = DownloadData.download(url = os.getenv("RANDOM_USERS_API").format(size=size))
         self.devices = DownloadData.download(url = os.getenv("RANDOM_DEVICES_API").format(size=size))
 
@@ -28,6 +28,7 @@ class LoadData(DB):
             for (user, d_device) in zip(self.users, self.devices):
                 partner = Partner(
                     data_id=user.get("id"),
+                    test_id=test_id,
                     first_name=user.get("first_name"),
                     last_name=user.get("last_name"),
                     email=user.get("email"),

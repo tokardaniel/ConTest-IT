@@ -19,3 +19,8 @@ def step_imp(c):
 def step_impl(c, size: int):
     l = LoadData()
     l.load(size)
+
+@step('Legyen egy partner a következő id-val "{id}", akinek van egy random eszköze')
+def step_impl(c, id: int):
+    l = LoadData()
+    l.load(size=1, test_id=int(id))

@@ -52,6 +52,12 @@ class Query(DB):
         with Session(self.engine) as session:
             return session.execute(stmt).first()[0]
 
+    def get_partner_by_test_id(self, id: int) -> Partner:
+        stmt = Select(Partner).where(Partner.test_id == id)
+
+        with Session(self.engine) as session:
+            return session.query(Partner).options(joinedload(Partner.sites).subqueryload(Site.devices)).where(Partner.test_id == id).first()
+
     # egy adottt parnerhez tartozó eszközöket adja vissza email alapján
     def get_device_by_partner_email(self, email: str) -> List[Device]:
         stmt = Select(Partner).where(Partner.email == email)
@@ -82,6 +88,12 @@ class Query(DB):
     def get_all_service_devices_of_partner(self) -> List[Partner]:
         with Session(self.engine) as session:
             return session.query(Partner).options(joinedload(Partner.sites).subqueryload(Site.devices)).where(Device.service == True).all()
+
+    def get_all_service_devices_of_partner_by_test_id(self, id: int) -> List[Partner]:
+        with Session(self.engine) as session:
+            return session.query(Partner).options(joinedload(Partner.sites).subqueryload(Site.devices)).where(
+                Device.service == True and Partner.test_id == id
+            ).all()
 
     def update_service_status(self, device: Device) -> None:
         stmt = Update(Device).where(Device.id == device.id).values(service = True)

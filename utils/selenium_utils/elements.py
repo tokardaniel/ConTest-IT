@@ -54,9 +54,12 @@ class Elements:
         text_input_element.clear()
         text_input_element.send_keys(name)
         # megvárjuk, hogy lenyíljon rendesen a lista
-        WebDriverWait(driver, wait_time).until(
-            EC.visibility_of_element_located(locator=list_items_locator)
-        )
+        try:
+            WebDriverWait(driver, wait_time).until(
+                EC.visibility_of_element_located(locator=list_items_locator)
+            )
+        except:
+            pass
         list_element = driver.find_element(*list_items_locator)
         list_element.click()
 
